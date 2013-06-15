@@ -1,13 +1,14 @@
 Cfa::Application.routes.draw do
-  resources :cases
-
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :teachers
-  resources :students do
+  resources :students, :only => [:index, :show] do
     resources :cases
+  end
+  resources :cases, :only => [:index, :show] do
+    member do
+      get :audio
+    end
   end
 
   match '/login' => "sessions#create", via: "post"
