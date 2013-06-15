@@ -3,10 +3,11 @@ Cfa::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :tutors
+  resources :students do
+    resources :cases
+  end
 
-
-  resources :students
-
+  match '/login' => "sessions#create", via: "post"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

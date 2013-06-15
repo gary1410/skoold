@@ -11,6 +11,16 @@
 @import "active_admin/mixins";
 @import "active_admin/base";
 
+body.active_admin {
+  @include sans-family;
+  line-height: 150%;
+  font-size: 72%;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  color: $text-color;
+}
+
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
