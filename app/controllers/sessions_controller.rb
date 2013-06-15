@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     else
       render :status => 403
     end
-    render :json => ""
+    render :json => { first_name: @tutor.first_name, last_name: @tutor.name, id: @tutor.id }.to_json
   end
 
   def destroy
