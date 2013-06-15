@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130615225333) do
+ActiveRecord::Schema.define(:version => 20130615232047) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -51,11 +51,11 @@ ActiveRecord::Schema.define(:version => 20130615225333) do
     t.integer  "student_id"
     t.integer  "teacher_id"
     t.integer  "subject_id"
-    t.integer  "class_id"
+    t.integer  "class_room_id"
     t.string   "message"
     t.string   "memo"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.float    "severity"
   end
 
@@ -94,6 +94,17 @@ ActiveRecord::Schema.define(:version => 20130615225333) do
     t.string   "password"
     t.integer  "login"
     t.string   "first_name"
+  end
+
+  create_table "timetables", :force => true do |t|
+    t.integer  "class_room_id"
+    t.integer  "subject_id"
+    t.integer  "teacher_id"
+    t.integer  "student_id"
+    t.string   "day_of_week"
+    t.string   "hour"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end

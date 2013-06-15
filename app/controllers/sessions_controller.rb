@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def create
     if authorized(params)
-      render :json => { first_name: @tutor.first_name, last_name: @tutor.name, id: @tutor.id }.to_json
+      render :json => { first_name: @tutor.first_name, last_name: @tutor.name }.to_json
     else
       render :status => 403
     end
