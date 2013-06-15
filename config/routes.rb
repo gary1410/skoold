@@ -1,8 +1,11 @@
 Cfa::Application.routes.draw do
+  resources :cases
+
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :tutors
+  resources :teachers
   resources :students do
     resources :cases
   end
