@@ -5,11 +5,17 @@ class StudentsController < InheritedResources::Base
     @teacher = Teacher.find_by_device_id params[:device_id]
     if params[:time].present? and @teacher.present?
       time = params[:time] # TODO: this has to be parsed/normalized first!
-      @students = Timetable.where(:hour => time.hour,
-                      :day_of_week => week_day_to_string(time.wday),
-                      :teacher_id => @teacher.id
-      ).collect { |t| t.student }
-      render :json => json_for(@students)
+      render :json => json_for(@teacher.get_students_at_time(time), serializer: StudentsSerializer)
+    else
+      render :status => 403
+    end
+  end
+
+  def show
+    @teacher = Teacher.find_by_device_id params[:device_id]
+    @student = Student.find(params[:id])
+    if @teacher.present? and @student.present?
+      render :json => json_for(@student, serializer: StudentSerializer)
     else
       render :status => 403
     end
