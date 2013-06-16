@@ -13,4 +13,9 @@ class Case < ActiveRecord::Base
   def status
     case_histories.order(:created_at).last!.status
   end
+
+  def date
+    created_at.to_formatted_s(:simple)
+  end
+
 end

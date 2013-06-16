@@ -15,5 +15,13 @@ class Student < ActiveRecord::Base
     end
   end
 
+  def full_name
+    "#{first_name} #{name}"
+  end
+
+  def age
+    "#{((Time.now - Time.strptime(self.date_of_birth, '%m/%d/%Y'))/1.year).floor} yrs"
+  end
+
   mount_uploader :picture, StudentPictureUploader
 end

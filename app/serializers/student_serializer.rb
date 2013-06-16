@@ -3,7 +3,7 @@ class StudentSerializer < ActiveModel::Serializer
   attributes :student_id, :first_name, :last_name, :dob, :parent_first_name, :status, :city,
              :parent_last_name, :parent_phone, :parent_email, :thumb, :sex
 
-  def sex
+  def gender
     object.sex
   end
 

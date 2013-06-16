@@ -1,2 +1,3 @@
-ActiveAdmin.register Teacher do
+ActiveAdmin.register Teacher, :namespace => :admin do
+  menu :if => proc { false }
 end

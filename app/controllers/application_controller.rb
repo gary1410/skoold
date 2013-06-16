@@ -6,11 +6,13 @@ class ApplicationController < ActionController::Base
   def decoded_params
     if params.present? and (params['params'] || params[:params]).present?
       ActiveSupport::JSON.decode(params["params"] || params[:params])
+    else
+      params
     end
   end
 
   def get_teacher
-    @teacher = Teacher.find_by_device_id(decoded_params['device_id'])
+    @teacher = Teacher.find_by_device_id(decoded_params['device_id'] || decoded_params[:device_id])
     unless @teacher.present?
       render :json => { status: 'error' }.to_json
     end

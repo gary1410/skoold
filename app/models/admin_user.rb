@@ -5,7 +5,7 @@ class AdminUser < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :super_user
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :super_user, :child_id
 
   def super_user?
     super_user || false

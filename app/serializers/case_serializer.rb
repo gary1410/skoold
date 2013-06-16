@@ -1,5 +1,9 @@
 class CaseSerializer < ActiveModel::Serializer
-  attributes :id, :subject, :classroom, :message, :memo, :teacher_first_name, :teacher_last_name, :timestamp, :severity, :status
+  attributes :case_id, :subject, :classroom, :message, :memo, :teacher_first_name, :teacher_last_name, :timestamp, :severity, :status
+
+  def case_id
+    object.id
+  end
 
   def subject
     object.subject.name

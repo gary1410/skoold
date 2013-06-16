@@ -14,14 +14,11 @@ module Api
 
   private
     def authorized(params)
-      if params[:params]
-        params = ActiveSupport::JSON.decode(params[:params])
-      end
-      if params['login'].present? and params['password'].present?
-        @teacher = Teacher.where(:login => params['login'], :password => params['password'])
+      if (decoded_params['login'] || decoded_params[:login]).present? and (decoded_params['password'] || decoded_params[:password]).present?
+        @teacher = Teacher.where(:login => (decoded_params['login'] || decoded_params[:login]), :password => (decoded_params['password'] || decoded_params[:password]))
         if @teacher.size > 0
           @teacher = @teacher[0]
-          @teacher.update_attribute :device_id, params['device_id']
+          @teacher.update_attribute :device_id, decoded_params[:device_id] || decoded_params['device_id']
         end
       else
         false

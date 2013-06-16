@@ -19,21 +19,30 @@ body.active_admin {
   margin: 0;
   padding: 0;
   color: $text-color;
-}
 
-// Overriding any non-variable SASS must be done after the fact.
-// For example, to change the default status-tag color:
-//
-//   body.active_admin {
-//      .status_tag { background: #6090DB; }
-//   }
-//
-// Notice that Active Admin CSS rules are nested within a
-// 'body.active_admin' selector to prevent conflicts with
-// other pages in the app. It is best to wrap your changes in a 
-// namespace so they are properly recognized. You have options
-// if you e.g. want different styles for different namespaces:
-//
-// .active_admin       applies to any Active Admin namespace
-// .admin_namespace    applies to the admin namespace (eg: /admin)
-// .other_namespace    applies to a custom namespace named other (eg: /other)
+  table.student {
+    thead th { text-align: center; }
+    td {
+      max-width: 100px; text-align: center; padding-top: 20px;
+      &.top { padding-top: 10px; padding-bottom: 10px; }
+      &.double_line { padding-top: 10px; }
+      &.picture { line-height: 0; img { height: 80px; width: 80px; } }
+      &.name span { display: block; line-height: 1.5em;
+        &.strong { font-weight: bold; font-size: 1.1em; }
+        &.blended { font-weight: lighter; color: #666666; }
+      }
+    }
+  }
+
+  //&.parent_namespace {
+    #header { background: #efefef; border: none; @include box-shadow(none);  }
+    #title_bar { border-top: none; @include box-shadow(0 2px 2px rgba(0, 0, 0, 0.37)); }
+    #header {
+      > #tabs { display: none; }
+      #site_title, #utility_nav > li > a, #utility_nav > li > a:hover { color: #8a949e; text-shadow: #fff 0 1px 0;
+        background: transparent;
+      }
+    }
+    .breadcrumb { display: none; }
+  //}
+}

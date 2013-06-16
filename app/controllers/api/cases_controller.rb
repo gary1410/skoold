@@ -4,7 +4,7 @@ module Api
     respond_to :json
 
     def create
-      newCase = @teacher.new_case(decoded_params['case'], params[:student_id])
+      newCase = @teacher.new_case(decoded_params['case'] || decoded_params[:case], params["student_id"] || params[:student_id])
       if newCase.save
         history = newCase.case_histories.new status: "open"
         if history.save
@@ -24,8 +24,8 @@ module Api
 
     def index
       # list of cases related to teacher, or student
-      if params[:student_id]
-        cases = Student.find(133 || params[:student_id]).cases
+      if params[:student_id] || params["student_id"]
+        cases = Student.find(133 || params[:student_id] || params["student_id"]).cases
         render :json => json_for(cases, :serializer => CasesSerializer, :root => false)
       else
         render :json => json_for(@tutor.cases, :serializer => CasesSerializer)

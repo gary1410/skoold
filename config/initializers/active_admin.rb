@@ -5,7 +5,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Cfa"
+  config.site_title = "referrED"
 
   #config.default_namespace = "/"
 
@@ -42,9 +42,17 @@ ActiveAdmin.setup do |config|
   # a namespace block. For example, to change the site title
   # within a namespace:
   #
-  #   config.namespace :admin do |admin|
-  #     admin.site_title = "Custom Admin Title"
-  #   end
+  config.root_to = 'students#index'
+
+  config.namespace :admin do |admin|
+    admin.site_title = "referrED"
+    admin.root_to = 'cases#index'
+  end
+
+  config.namespace :parent do |parent|
+    parent.site_title = "referrED for Parents"
+    parent.root_to = 'students#index'
+  end
 
   #
   # This will ONLY change the title for the admin section. Other
@@ -96,7 +104,6 @@ ActiveAdmin.setup do |config|
   #
   # Default:
   #config.root_to = -> { if current_admin_user.super_user? then 'teacher#index' else 'cases#index' end }
-  config.root_to = 'teachers#index'
 
   # == Admin Comments
   #
