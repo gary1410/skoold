@@ -42,7 +42,6 @@ ActiveAdmin.setup do |config|
   # a namespace block. For example, to change the site title
   # within a namespace:
   #
-  config.root_to = 'students#index'
 
   config.namespace :admin do |admin|
     admin.site_title = "referrED"

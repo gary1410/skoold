@@ -34,6 +34,14 @@ class Teacher < ActiveRecord::Base
     ).first.subject
   end
 
+  def short_name
+    if self.first_name[0] == 'A' || self.first_name[0] == 'D'
+      "Ms. #{self.name}"
+    else
+      "Mr. #{self.name}"
+    end
+  end
+
 private
   def week_day_to_string(wday)
     case wday

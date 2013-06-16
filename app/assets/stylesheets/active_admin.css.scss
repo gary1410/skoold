@@ -34,22 +34,48 @@ body.active_admin {
     }
   }
 
-  .card {
-    .card-picture { line-height: 0;
-      img { width: 80px; height: 80px; }
-    }
-    .card-picture, .name, .buttons { float: left; display: inline-block; }
-  }
+  .panel {
+    > .card { overflow: hidden; padding: 15px;
+      .picture { line-height: 0;
+        img { width: 80px; height: 80px; }
+      }
+      .name {
+        span { display: block;
+          &.strong { font-weight: bold; font-size: 1.1em; }
+          &.blended { font-weight: lighter; color: #666666; }
+        }
+      }
+      .buttons {
 
-  //&.parent_namespace {
-    #header { background: #efefef; border: none; @include box-shadow(none);  }
-    #title_bar { border-top: none; @include box-shadow(0 2px 2px rgba(0, 0, 0, 0.37)); }
-    #header {
-      > #tabs { display: none; }
-      #site_title, #utility_nav > li > a, #utility_nav > li > a:hover { color: #8a949e; text-shadow: #fff 0 1px 0;
-        background: transparent;
+      }
+      .picture, .name, .buttons { float: left; display: inline-block;  margin: 0 20px 20px 0; }
+    }
+    > .rows > .row { display: block;
+      > .wrapper { display: inline-block; min-height: 30px; overflow: hidden;
+        .left, .right { float: left; }
+        .left { min-width: 200px; }
+        .right { margin-left: 100px; text-align: left }
       }
     }
-    .breadcrumb { display: none; }
-  //}
+    > .comment_row { display: block;
+      > span, > input { display: block }
+    }
+    > .voice_memo {
+      > span, > div, > div > span { display: block; }
+      > div {
+        padding: 20px;
+        > input { padding: 5px 15px; }
+      }
+    }
+  }
+
+  #header { background: #efefef; border: none; @include box-shadow(none);  }
+  #title_bar { border-top: none; @include box-shadow(0 2px 2px rgba(0, 0, 0, 0.37)); }
+  #header {
+    > #tabs { display: none; }
+    #site_title, #utility_nav > li > a, #utility_nav > li > a:hover { color: #8a949e; text-shadow: #fff 0 1px 0;
+      background: transparent;
+    }
+  }
+  .breadcrumb { display: none; }
 }
