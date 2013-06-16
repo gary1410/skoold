@@ -2,7 +2,8 @@ module Api
   class SessionsController < ApplicationController
     def create
       if authorized(params)
-        render :json => { first_name: @teacher.first_name, last_name: @teacher.name, status: 'success' }.to_json
+        render :json => { first_name: @teacher.first_name, last_name: @teacher.name, status: 'success',
+                          subject: Subject.first.name }.to_json
       else
         render :json => { status: 'error' }.to_json
       end

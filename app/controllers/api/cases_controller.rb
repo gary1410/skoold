@@ -4,7 +4,10 @@ module Api
     respond_to :json
 
     def create
-      myCase= @teacher.cases.new(params['case'] || params[:case])
+      myCase= @teacher.cases.new(decoded_params['case'])
+      myCase.student_id = params[:student_id]
+      myCase.subject_id = @teacher.get_subject_at_time Time.parse time
+      myCase.class_room_id = @teacher.get_class_room_at_time Time.parse time
       if myCase.save
         history = myCase.case_histories.new status: "open"
         if history.save

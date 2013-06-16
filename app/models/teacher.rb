@@ -5,9 +5,24 @@ class Teacher < ActiveRecord::Base
   has_many :cases
 
   def get_students_at_time(time)
+    time=Time.parse "2013-06-12T11:00:39Z"
     @students = Timetable.where(:hour => time.hour.to_s + ":00",:day_of_week => week_day_to_string(time.wday),
                                 :teacher_id => self.id
     ).collect { |t| t.student }
+  end
+
+  def get_class_room_at_time(time)
+    time=Time.parse "2013-06-12T11:00:39Z"
+    Timetable.where(:hour => time.hour.to_s + ":00",:day_of_week => week_day_to_string(time.wday),
+                                :teacher_id => self.id
+    ).first.class_room
+  end
+
+  def get_subject_at_time(time)
+    time=Time.parse "2013-06-12T11:00:39Z"
+    Timetable.where(:hour => time.hour.to_s + ":00",:day_of_week => week_day_to_string(time.wday),
+                                :teacher_id => self.id
+    ).first.subject
   end
 
 private

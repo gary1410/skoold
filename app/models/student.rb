@@ -5,5 +5,15 @@ class Student < ActiveRecord::Base
   has_many :timetables
   has_many :cases
 
+  def status
+    if self.cases.joins(:case_histories).where("case_histories.status" => "open").size > 0
+      "open"
+    elsif self.cases.joins(:case_histories).where("case_histories.status" => "open").size > 0
+      "processing"
+    else
+      "closed"
+    end
+  end
+
   mount_uploader :picture, StudentPictureUploader
 end
