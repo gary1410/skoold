@@ -19,7 +19,7 @@ module Api
       if params[:login].present? and params[:password].present?
         @teacher = Teacher.where(:login => params[:login], :password => params[:password])
         if @teacher.size > 0
-          @teacher = @tutor[0]
+          @teacher = @teacher[0]
           @teacher.update_attribute :device_id, params[:device_id]
         end
       else

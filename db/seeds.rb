@@ -9,28 +9,28 @@
 teachers = Teacher.create([{
   first_name: "Alice",
   name: "Copper",
-  tutor_id: "1",
+  teacher_id: "1",
   device_id: "",
   password: "foobar",
   login: "alice"
 },{
   first_name: "Bob",
   name: "Baker",
-  tutor_id: "2",
+  teacher_id: "2",
   device_id: "",
   password: "foobar",
   login: "bob"
 },{
   first_name: "Charlie",
   name: "Unicorn",
-  tutor_id: "3",
+  teacher_id: "3",
   device_id: "",
   password: "foobar",
   login: "charlie"
 },{
   first_name: "Dora",
   name: "Smith",
-  tutor_id: "4",
+  teacher_id: "4",
   device_id: "",
   password: "foobar",
   login: "dora"
