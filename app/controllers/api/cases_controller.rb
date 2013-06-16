@@ -7,7 +7,13 @@ module Api
       myCase= @teacher.cases.new(params['case'] || params[:case])
       if myCase.save
         history = myCase.case_histories.new status: "open"
-        history.save
+        if history.save
+          render :json => {success: 'true'}.to_json
+        else
+          render :json => {success: 'false'}.to_json
+        end
+      else
+        render :json => {success: 'false'}.to_json
       end
     end
 
