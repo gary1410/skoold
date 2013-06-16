@@ -73,12 +73,13 @@ Student.create([{first_name:"Conor", name: "Freidersdorf", picture: "", descript
     class_rooms = ClassRoom.all.to_a.shuffle.slice(0,2)
     teachers = Teacher.all.to_a.shuffle.slice(0,2)
     Student.all.each_with_index do |student, index|
-      Timetable.create class_room_id: class_rooms[index % 2],
-                       subject_id: subjects[index % 2],
-                       teacher_id: teachers[index % 2],
-                       student_id: student,
+      tt= Timetable.new class_room_id: class_rooms[index % 2].id,
+                       subject_id: subjects[index % 2].id,
+                       teacher_id: teachers[index % 2].id,
+                       student_id: student.id,
                        day_of_week: day_of_week,
                        hour: hour
+      tt.save!
     end
   end
 end

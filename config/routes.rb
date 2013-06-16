@@ -12,7 +12,7 @@ Cfa::Application.routes.draw do
       end
     end
 
-    match '/login(.:format)' => "sessions#create", via: "post", :as => :login
+    match '/login(.:format)' => "sessions#create", via: :get, :as => :login
   end
 
   # The priority is based upon order of creation:

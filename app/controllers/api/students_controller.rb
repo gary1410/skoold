@@ -6,9 +6,9 @@ module Api
       @teacher = Teacher.find_by_device_id params[:device_id]
       if params[:time].present? and @teacher.present?
         time = Time.parse params[:time]
-        render :json => json_for(@teacher.get_students_at_time(time), serializer: StudentsSerializer)
+        render :json => json_for(@teacher.get_students_at_time(time), serializer: StudentsSerializer, :root => false)
       else
-        render :status => 403
+        render :json => { status: 'error' }.to_json
       end
     end
 
@@ -18,21 +18,9 @@ module Api
       if @teacher.present? and @student.present?
         render :json => json_for(@student, serializer: StudentSerializer)
       else
-        render :status => 403
+        render :json => { status: 'error' }.to_json
       end
     end
 
-    private
-    def week_day_to_string(wday)
-      case wday
-        when 0 then "Monday"
-        when 1 then "Tuesday"
-        when 2 then "Wednesday"
-        when 3 then "Thursday"
-        when 4 then "Friday"
-        when 5 then "Saturday"
-        when 6 then "Sunday"
-      end
-    end
   end
 end

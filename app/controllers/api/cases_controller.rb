@@ -25,7 +25,7 @@ module Api
     def get_teacher
       @teacher = Teacher.find_by_device_id params[:device_id]
       unless @teacher.nil?
-        render :status => 403
+        render :json => { status: 'error' }.to_json
       end
     end
   end
