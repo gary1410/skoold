@@ -14,7 +14,11 @@ class CaseSerializer < ActiveModel::Serializer
   end
 
   def memo
-    object.memo.url
+    if object.memo.present?
+      object.memo.url
+    else
+      ""
+    end
   end
 
   def teacher_first_name
@@ -22,7 +26,7 @@ class CaseSerializer < ActiveModel::Serializer
   end
 
   def teacher_last_name
-    object.teacher.last_name
+    object.teacher.name
   end
 
   def timestamp

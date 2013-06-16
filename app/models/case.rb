@@ -8,6 +8,8 @@ class Case < ActiveRecord::Base
 
   has_many :case_histories
 
+  mount_uploader :memo, AudioUploader
+
   def status
     case_histories.order(:created_at).last!.status
   end

@@ -1,7 +1,11 @@
 # single student entry serializer (with details)
 class StudentSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :dob, :parent_first_name, :status, :city,
+  attributes :student_id, :first_name, :last_name, :dob, :parent_first_name, :status, :city,
              :parent_last_name, :parent_phone, :parent_email, :thumb
+
+  def student_id
+    object.id
+  end
 
   def parent_phone
     object.parent_phone_number

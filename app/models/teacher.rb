@@ -4,6 +4,15 @@ class Teacher < ActiveRecord::Base
   has_many :timetables
   has_many :cases
 
+  def new_case(obj, student_id)
+    myCase = self.cases.new obj
+    myCase.student_id = student_id
+    myCase.subject_id = get_subject_at_time(time).id
+    myCase.class_room_id = get_class_room_at_time(time).id
+    myCase.severity ||= 0.0
+    myCase
+  end
+
   def get_students_at_time(time)
     time=Time.parse "2013-06-12T11:00:39Z"
     @students = Timetable.where(:hour => time.hour.to_s + ":00",:day_of_week => week_day_to_string(time.wday),
@@ -37,4 +46,10 @@ private
       when 6 then "Sunday"
     end
   end
+
+  def time
+    # decoded_params['time']
+    Time.parse "2013-06-12T11:00:39Z"
+  end
+
 end
