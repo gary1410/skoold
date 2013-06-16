@@ -7,6 +7,8 @@ ActiveAdmin.setup do |config|
   #
   config.site_title = "Cfa"
 
+  #config.default_namespace = "/"
+
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
@@ -31,7 +33,7 @@ ActiveAdmin.setup do |config|
   # will namespace routes to /hello_world/*
   #
   # To set no namespace by default, use:
-  #   config.default_namespace = false
+  config.default_namespace = false
   #
   # Default:
   # config.default_namespace = :admin
@@ -84,7 +86,7 @@ ActiveAdmin.setup do |config|
   # link. For example :get, :delete, :put, etc..
   #
   # Default:
-  # config.logout_link_method = :get
+  config.logout_link_method = :delete
 
   # == Root
   #
@@ -92,7 +94,8 @@ ActiveAdmin.setup do |config|
   # roots for each namespace.
   #
   # Default:
-  # config.root_to = 'dashboard#index'
+  #config.root_to = -> { if current_admin_user.super_user? then 'teacher#index' else 'cases#index' end }
+  config.root_to = 'teachers#index'
 
   # == Admin Comments
   #

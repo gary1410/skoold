@@ -7,8 +7,8 @@ class Teacher < ActiveRecord::Base
   def new_case(obj, student_id)
     myCase = self.cases.new obj
     myCase.student_id = student_id
-    myCase.subject_id = get_subject_at_time(time).id
-    myCase.class_room_id = get_class_room_at_time(time).id
+    myCase.subject_id = get_subject_at_time("").id
+    myCase.class_room_id = get_class_room_at_time("").id
     myCase.severity ||= 0.0
     myCase
   end
@@ -45,11 +45,6 @@ private
       when 5 then "Saturday"
       when 6 then "Sunday"
     end
-  end
-
-  def time
-    # decoded_params['time']
-    Time.parse "2013-06-12T11:00:39Z"
   end
 
 end

@@ -1,6 +1,6 @@
 class Student < ActiveRecord::Base
   attr_accessible :description, :name, :picture, :picture_cache, :first_name, :date_of_birth, :city,
-                  :parent_first_name, :parent_last_name, :parent_phone_number , :parent_email
+                  :parent_first_name, :parent_last_name, :parent_phone_number , :parent_email, :sex
 
   has_many :timetables
   has_many :cases
