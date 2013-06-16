@@ -26,5 +26,11 @@ module Api
         false
       end
     end
+
+    def time
+      # decoded_params['time']
+      "2013-06-12T11:00:39Z"
+    end
+
   end
 end

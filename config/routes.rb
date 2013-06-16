@@ -3,8 +3,8 @@ Cfa::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   namespace :api, defaults: {format: 'json'} do
-    resources :students, :only => [:index, :show] do
-      resources :cases, :only => [:create, :show]
+    resources :students, :only => [:index] do
+      resources :cases, :only => [:create, :index]
     end
     resources :cases, :only => [:index, :show] do
       member do

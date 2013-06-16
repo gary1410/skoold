@@ -9,7 +9,7 @@ class StudentsSerializer < ActiveModel::Serializer
   end
 
   def students
-    json_for(object, :serialize => StudentSerializer)
+    ActiveSupport::JSON.decode json_for(object, :serialize => StudentSerializer)
   end
 
 end

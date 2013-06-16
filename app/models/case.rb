@@ -5,4 +5,10 @@ class Case < ActiveRecord::Base
   belongs_to :teacher
   belongs_to :subject
   belongs_to :class_room
+
+  has_many :case_histories
+
+  def status
+    case_histories.order(:created_at).last!.status
+  end
 end
