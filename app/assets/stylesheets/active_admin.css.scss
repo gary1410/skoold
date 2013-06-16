@@ -34,6 +34,13 @@ body.active_admin {
     }
   }
 
+  .card {
+    .card-picture { line-height: 0;
+      img { width: 80px; height: 80px; }
+    }
+    .card-picture, .name, .buttons { float: left; display: inline-block; }
+  }
+
   //&.parent_namespace {
     #header { background: #efefef; border: none; @include box-shadow(none);  }
     #title_bar { border-top: none; @include box-shadow(0 2px 2px rgba(0, 0, 0, 0.37)); }

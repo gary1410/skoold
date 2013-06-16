@@ -1,7 +1,7 @@
 ActiveAdmin.register Case, :namespace => :admin do
   config.filters = false
 
-  actions :index, :edit, :update, :delete
+  actions :index, :show, :update, :delete
 
   index do
     table :class => 'index_table index student', :paginator => false do
@@ -59,6 +59,24 @@ ActiveAdmin.register Case, :namespace => :admin do
     end
   end
 
+  show do |f|
+    div class: "panel" do
+      div class: "card" do
+        div class: "picture top" do
+          img src: f.student.picture.url
+        end
+        div class: "name double_line" do
+          span class: "strong" do
+            f.student.full_name
+          end
+          span class: "blended" do
+            "#{f.student.age} #{f.student.city}"
+          end
+        end
+      end
+    end
+  end
+
   form :html => { :enctype => "multipart/form-data" } do |f|
     div class: "panel" do
       div class: "picture top" do
@@ -73,20 +91,18 @@ ActiveAdmin.register Case, :namespace => :admin do
         end
       end
       div class: "buttons" do
-        f.actions
+        f.button(:submit)
+      end
+      f.inputs "General" do
+        f.input :student
+        f.input :teacher
+        f.input :subject
+        f.input :class_room
+        f.input :severity
+        f.input :memo, :as => :file
+        f.input :message, :as => :text
       end
     end
-    f.inputs "General" do
-      f.input :student
-      f.input :teacher
-      f.input :subject
-      f.input :class_room
-      f.input :severity
-      f.input :memo, :as => :file
-      f.input :message, :as => :text
-    end
-
-    f.actions
   end
 
 end
