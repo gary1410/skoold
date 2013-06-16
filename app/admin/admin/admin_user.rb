@@ -1,4 +1,4 @@
-ActiveAdmin.register AdminUser do     
+ActiveAdmin.register AdminUser do
   index do                            
     column :email                     
     column :current_sign_in_at        
@@ -22,6 +22,7 @@ ActiveAdmin.register AdminUser do
   end
 
   controller do
+
     def update
       #render 'active_admin/resource/edit.html.arb'
       #redirect_to {:action => :show}, {:notice => "Admin record updated successfully"}

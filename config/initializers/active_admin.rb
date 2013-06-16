@@ -45,6 +45,7 @@ ActiveAdmin.setup do |config|
   #   config.namespace :admin do |admin|
   #     admin.site_title = "Custom Admin Title"
   #   end
+
   #
   # This will ONLY change the title for the admin section. Other
   # namespaces will continue to use the main "site_title" configuration.
@@ -86,7 +87,7 @@ ActiveAdmin.setup do |config|
   # link. For example :get, :delete, :put, etc..
   #
   # Default:
-  config.logout_link_method = :delete
+  config.logout_link_method = :get
 
   # == Root
   #
@@ -103,7 +104,7 @@ ActiveAdmin.setup do |config|
   # Admin comments are enabled by default.
   #
   # Default:
-  # config.allow_comments = true
+  config.allow_comments = false
   #
   # You can turn them on and off for any given namespace by using a
   # namespace config block.
@@ -118,7 +119,7 @@ ActiveAdmin.setup do |config|
   #
   # Enable and disable Batch Actions
   #
-  config.batch_actions = true
+  config.batch_actions = false
 
 
   # == Controller Filters
@@ -208,6 +209,24 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
+end
 
+module ActiveAdmin
+  module Devise
 
+    def self.config
+      config = {
+        :path => '',
+        :controllers => ActiveAdmin::Devise.controllers,
+        :path_names => { :sign_in => 'login', :sign_out => "logout" }
+      }
+
+      if ::Devise.respond_to?(:sign_out_via)
+        logout_methods = [::Devise.sign_out_via, ActiveAdmin.application.logout_link_method].flatten.uniq
+        config.merge!( :sign_out_via => logout_methods)
+      end
+
+      config
+    end
+  end
 end
