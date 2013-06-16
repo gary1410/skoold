@@ -2,16 +2,18 @@ Cfa::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :students, :only => [:index, :show] do
-    resources :cases
-  end
-  resources :cases, :only => [:index, :show] do
-    member do
-      get :audio
+  namespace :api, defaults: {format: 'json'} do
+    resources :students, :only => [:index, :show] do
+      resources :cases, :only => [:create, :show]
     end
-  end
+    resources :cases, :only => [:index, :show] do
+      member do
+        get :audio
+      end
+    end
 
-  match '/login' => "sessions#create", via: "post"
+    match '/login(.:format)' => "sessions#create", via: "post", :as => :login
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
