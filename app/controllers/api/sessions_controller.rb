@@ -13,8 +13,8 @@ module Api
 
   private
     def authorized(params)
-      if params[:payload]
-        params = ActiveSupport::JSON.decode(params[:payload])
+      if params[:params]
+        params = ActiveSupport::JSON.decode(params[:params])
       end
       if params[:login].present? and params[:password].present?
         @teacher = Teacher.where(:login => params[:login], :password => params[:password])
