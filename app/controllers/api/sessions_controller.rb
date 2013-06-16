@@ -3,7 +3,7 @@ module Api
     def create
       if authorized(params)
         render :json => { first_name: @teacher.first_name, last_name: @teacher.name, status: 'success',
-                          subject: Subject.first.name }.to_json
+                          subject: @teacher.get_subject_at_time("").name }.to_json
       else
         render :json => { status: 'error' }.to_json
       end
