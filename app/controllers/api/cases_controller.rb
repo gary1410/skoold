@@ -8,15 +8,17 @@ module Api
     end
 
     def show
-
+      # detailed case
+      render :json => json_for(Case.find(params[:id]), :serializer => CaseSerializer)
     end
 
     def index
-
+      # list of cases related to teacher
+      render :json => json_for(@tutor.cases, :serializer => CasesSerializer)
     end
 
     def audio
-
+      Case.find(params[:id]).audio
     end
 
   private
