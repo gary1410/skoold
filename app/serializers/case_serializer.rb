@@ -14,7 +14,7 @@ class CaseSerializer < ActiveModel::Serializer
   end
 
   def message
-    object.message
+    object.message || ""
   end
 
   def memo
@@ -38,7 +38,7 @@ class CaseSerializer < ActiveModel::Serializer
   end
 
   def status
-    object.status
+    object.status || ""
   end
 
   def severity
