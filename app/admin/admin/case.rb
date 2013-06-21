@@ -11,6 +11,7 @@ ActiveAdmin.register Case, :namespace => :admin do
           th ""
           th "Date"
           th "Status"
+          th "Message"
           th "Comment"
           th "Voice Memo"
           th ""
@@ -36,6 +37,9 @@ ActiveAdmin.register Case, :namespace => :admin do
             end
             td class: "status" do
               c.status
+            end
+            td class: "status" do
+              c.message
             end
             td class: "comment" do
               if c.message.present?

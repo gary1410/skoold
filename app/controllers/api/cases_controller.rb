@@ -25,7 +25,7 @@ module Api
     def index
       # list of cases related to teacher, or student
       if params[:student_id] || params["student_id"]
-        cases = Student.find(params[:student_id] || params["student_id"]).cases
+        cases = Student.find(params[:student_id] || params["student_id"]).cases.order("cases.id DESC")
         render :json => json_for(cases, :serializer => CasesSerializer, :root => false)
       else
         render :json => json_for(@tutor.cases, :serializer => CasesSerializer)
