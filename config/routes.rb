@@ -1,4 +1,7 @@
 Cfa::Application.routes.draw do
+
+  resources :greeter, :path => '', :only => [:index]
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -13,7 +16,6 @@ Cfa::Application.routes.draw do
       end
     end
     get '/students/:student_id/post(.:format)', :to => "cases#create", :as => :create_cases
-
     match '/login(.:format)' => "sessions#create", via: :get, :as => :login
   end
 

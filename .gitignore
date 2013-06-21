@@ -32,3 +32,4 @@ pickle-email-*.html
 .idea
 .idea/*
 /.idea
+/public/uploads
