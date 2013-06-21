@@ -45,11 +45,13 @@ ActiveAdmin.setup do |config|
 
   config.namespace :admin do |admin|
     admin.site_title = "referrED"
+    admin.site_title_link = "/admin"
     admin.root_to = 'cases#index'
   end
 
   config.namespace :parent do |parent|
     parent.site_title = "referrED for Parents"
+    parent.site_title_link = "/"
     parent.root_to = 'students#index'
   end
 

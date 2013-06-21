@@ -4,7 +4,7 @@ ActiveAdmin.register Student, :namespace => :admin do
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "Student data" do
       f.input :first_name
-      f.input :name
+      f.input :name, label => "Last name"
       f.input :description
       f.input :city
       f.input :sex, :as => :select, :include_blank => false, :collection => { 'Boy'=>'m', 'Girl'=>'f' }
