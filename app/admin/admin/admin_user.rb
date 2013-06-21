@@ -27,8 +27,6 @@ ActiveAdmin.register AdminUser, :namespace => :admin do
   controller do
 
     def update
-      #render 'active_admin/resource/edit.html.arb'
-      #redirect_to {:action => :show}, {:notice => "Admin record updated successfully"}
       @admin_user = AdminUser.find(params[:id])
       params[:admin_user].delete_if { |k, v| v.empty? }
       if @admin_user.update_attributes params[:admin_user]

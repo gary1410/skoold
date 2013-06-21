@@ -44,9 +44,6 @@ ActiveAdmin.register Student, :namespace => :parent, :name => "Student" do
                 input type: "checkbox", disabled: "true"
               end
             end
-            #td class: "action_button" do
-            #  link_to "View", parent_student_case_path(student_id: student, id: c)
-            #end
           end
         end
       end

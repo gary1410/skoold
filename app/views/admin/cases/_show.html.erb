@@ -1,0 +1,78 @@
+<% if defined?(url_back) %><%= link_to "Back", url_back %><% end %>
+<div class='panel' xmlns="http://www.w3.org/1999/html">
+    <div class='card'>
+        <div class='picture'><img src="<%= object.student.picture.url %>" /></div>
+        <div class='name'>
+            <span class='strong'><%= object.student.full_name %></span>
+            <span class='blended'><%= "#{object.student.age} #{object.student.city}" %></span>
+        </div>
+      <% if is_admin %>
+        <div class='buttons'>
+            <input class='edit' type='button' id='edit' value='Save' />
+            <input class='delete' type='button' id='delete' value='Delete' />
+        </div>
+      <% end %>
+    </div>
+    <div class='rows'>
+        <div class='row'>
+            <div class='wrapper'>
+                <span class='left strong'>Date</span>
+                <span class='right'><%= object.date %></span>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='wrapper'>
+                <span class='left strong'>Teacher</span>
+                <span class='right'><%= object.teacher.short_name %></span>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='wrapper'>
+                <span class='left strong'>Teacher note</span>
+                <span class='right'><%= object.message %></span>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='wrapper'>
+                <span class='left strong'>Case status</span>
+                <span class='right'>
+                  <% if is_admin %><select class='status'>
+                    <option value='open' <%= (object.status == 'open' ? "selected='selected'".html_safe : "") %>>open</option>
+                    <option value='processing' <%= (object.status == 'processing' ? "selected='selected'".html_safe : "") %>>processing</option>
+                    <option value='closed' <%= (object.status == 'closed' ? "selected='selected'".html_safe : "") %>>closed</option>
+                  </select><% else %>
+                  <%= object.status %>
+                  <% end %>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class='comment_row'>
+        <span>Timeline</span>
+        <ul class="comments">
+      <% object.case_histories.order("case_histories.created_at DESC").each do |ch| %>
+          <li class='comment'>
+              <span class='date'><%= ch.created_at.to_formatted_s(:simple) %></span>
+              <span class='status'><%= ch.status %></span>
+              <% if ch.comment.present? %><pre><%= ch.comment %></pre><% end %>
+          </li>
+      <% end %>
+        </ul>
+      <% if is_admin %>
+        <textarea name="case_history['comment']"></textarea>
+        <input class='add_comment' type='button' value='Add comment' />
+      <% end %>
+    </div>
+    <div class='voice_memo'>
+        <span>Voice memo</span>
+        <div>
+          <% if object.memo.present? %>
+            <span>Play voice memo</span>
+            <input type='button' value="&#9654;" />
+          <% else %>
+            <span>No voice memo</span>
+            <input type='button' value="&#9654;" disabled="disabled" />
+          <% end %>
+        </div>
+    </div>
+</div>

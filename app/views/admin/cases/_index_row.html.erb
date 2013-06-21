@@ -1,0 +1,24 @@
+<tr>
+  <% if is_admin %>
+    <td class="picture top"><%= image_tag object.student.picture.url %></td>
+    <td class="name double_line">
+        <span class="strong"><%= object.student.full_name %></span>
+        <span class="blended"><%= "#{object.student.age} #{object.student.city}" %></span>
+    </td>
+  <% end %>
+    <td class="date"><%= object.date %></td>
+    <td class="status"><%= object.status %></td>
+    <td class="status"><%= object.message %></td>
+    <td class="comment"><input type="checkbox" <%= if object.message.present? then
+                                                      "checked='checked'" else
+                                                      "" end %> disabled="true" /></td>
+    <td class="voice_memo"><input type="checkbox" <%= if object.memo.present? then
+                                                         "checked='checked'" else
+                                                         "" end %> disabled="true" /></td>
+  <% if is_admin %>
+    <td class="action_button"><%= link_to("Edit", admin_case_path(object)) %></td>
+    <td class="action_button"><%= link_to("Delete", admin_case_path(object), :method => :delete) %></td>
+  <% else %>
+    <td class="action_button"><%= link_to("Details", parent_student_case_path(:student_id => object.student_id, :id => object)) %></td>
+  <% end %>
+</tr>

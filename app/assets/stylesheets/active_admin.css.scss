@@ -59,6 +59,12 @@ body.active_admin {
     }
     > .comment_row { display: block;
       > span, > input { display: block }
+      > ul.comments { padding: 0; list-style: none; margin: 0 20px 20px;
+        > li.comment { min-height: 20px; background: #ffffff; border-radius: 3px; padding: 5px; margin-bottom: 5px;
+          > span.date { float: left }
+          > span.status { float: left; margin-left: 212px; }
+        }
+      }
     }
     > .voice_memo {
       > span, > div, > div > span { display: block; }
