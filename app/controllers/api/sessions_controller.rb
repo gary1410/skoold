@@ -1,5 +1,7 @@
 module Api
   class SessionsController < ApplicationController
+    before_filter :get_teacher, :only => [:destroy]
+
     def create
       if authorized(params)
         render :json => { first_name: @teacher.first_name, last_name: @teacher.name, status: 'success',
@@ -15,10 +17,10 @@ module Api
   private
     def authorized(params)
       if (decoded_params['login'] || decoded_params[:login]).present? and (decoded_params['password'] || decoded_params[:password]).present?
-        @teacher = Teacher.where(:login => (decoded_params['login'] || decoded_params[:login]), :password => (decoded_params['password'] || decoded_params[:password]))
-        if @teacher.size > 0
-          @teacher = @teacher[0]
-          @teacher.update_attribute :device_id, decoded_params[:device_id] || decoded_params['device_id']
+        @teacher = Teacher.where(:login => (decoded_params['login'] || decoded_params[:login]), :password => (decoded_params['password'] || decoded_params[:password])).first
+        if @teacher.present?
+          Teacher.where(:device_id => decoded_params[:device_id] || decoded_params['device_id']).update_all :device_id => nil
+          @teacher.reload.update_attribute :device_id, decoded_params[:device_id] || decoded_params['device_id']
         end
       else
         false

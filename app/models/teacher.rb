@@ -14,10 +14,16 @@ class Teacher < ActiveRecord::Base
   end
 
   def get_students_at_time(time)
-    time=Time.parse "2013-06-12T11:00:39Z"
-    @students = Timetable.where(:hour => time.hour.to_s + ":00",:day_of_week => week_day_to_string(time.wday),
-                                :teacher_id => self.id
-    ).collect { |t| t.student }
+    case self.first_name
+      when "Alice" then topic = "Biology"
+      when "Bob" then topic = "English"
+      when "Charlie" then topic = "Math"
+      when "Dora" then topic = "Art"
+    end
+    @students = Student.joins{timetables}.where{{timetables => (
+        subject_id.eq(Subject.where(:name => topic).first.id) &
+        teacher_id.eq(my{self.id}))
+    }}.order(:name, :first_name).group(:id).all
   end
 
   def get_class_room_at_time(time)
@@ -28,10 +34,16 @@ class Teacher < ActiveRecord::Base
   end
 
   def get_subject_at_time(time)
-    time=Time.parse "2013-06-12T11:00:39Z"
-    Timetable.where(:hour => time.hour.to_s + ":00",:day_of_week => week_day_to_string(time.wday),
-                                :teacher_id => self.id
-    ).first.subject
+    case self.first_name
+      when "Alice" then topic = "Biology"
+      when "Bob" then topic = "English"
+      when "Charlie" then topic = "Math"
+      when "Dora" then topic = "Art"
+    end
+    Subject.find_by_name(topic)
+    #Timetable.where(:hour => time.hour.to_s + ":00",:day_of_week => week_day_to_string(time.wday),
+    #                            :teacher_id => self.id
+    #).first.subject
   end
 
   def short_name
